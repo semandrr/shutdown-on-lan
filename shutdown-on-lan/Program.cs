@@ -96,7 +96,7 @@ class Program
         }
     }
 
-    private static bool IsMagicPacket(byte[] packet)
+    static bool IsMagicPacket(byte[] packet)
     {
         if (packet.Length < 102) return false;
         for (int i = 0; i < 6; i++)
@@ -104,7 +104,7 @@ class Program
         return true;
     }
 
-    private static string GetMacFromPacket(byte[] packet)
+    static string GetMacFromPacket(byte[] packet)
     {
         var macBytes = packet.Skip(6).Take(6);
         return string.Join(":", macBytes.Select(b => b.ToString("X2")));
