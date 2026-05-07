@@ -6,7 +6,6 @@ using System.Net.Sockets;
 namespace shutdown_on_lan;
 class Program
 {
-
     static void Main()
     {
         // not supported, i never used these systems before
