@@ -46,19 +46,19 @@ class Program
 
         using (UdpClient listener = new UdpClient(Config.wolPort))
         {
-            IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, Config.wolPort);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, Config.wolPort);
             Console.WriteLine($"[{DateTime.Now}] Listening for WoL packets on port {Config.wolPort}...");
             try
             {
                 while (true)
                 {
-                    byte[] bytes = listener.Receive(ref groupEP);
+                    byte[] bytes = listener.Receive(ref ip);
                     if (IsMagicPacket(bytes))
                     {
                         string mac = GetMacFromPacket(bytes);
                         if (mac == Config.macAddr.ToUpper())
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Received WOL-packet on valid MAC {mac} from {groupEP}, sending shutdown request.");
+                            Console.WriteLine($"[{DateTime.Now}] Received WOL-packet on valid MAC {mac} from {ip}, sending shutdown request.");
                             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                             {
                                 if (Config.instantShutdown == 0)
@@ -85,7 +85,7 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Ignoring WOL-packet received on invalid MAC {mac} from {groupEP}");
+                            Console.WriteLine($"[{DateTime.Now}] Ignoring WOL-packet received on invalid MAC {mac} from {ip}");
                         }
                     }
                 }
@@ -99,19 +99,14 @@ class Program
 
     private static bool IsMagicPacket(byte[] packet)
     {
-        // A Magic Packet is 102 bytes: 6 bytes of 0xFF + (6 bytes MAC * 16)
         if (packet.Length < 102) return false;
-
-        // Check first 6 bytes for 0xFF
         for (int i = 0; i < 6; i++)
             if (packet[i] != 0xFF) return false;
-
         return true;
     }
 
     private static string GetMacFromPacket(byte[] packet)
     {
-        // Extract the MAC address (bytes 6-11)
         var macBytes = packet.Skip(6).Take(6);
         return string.Join(":", macBytes.Select(b => b.ToString("X2")));
     }
