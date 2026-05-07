@@ -1,8 +1,8 @@
 # Shutdown-on-LAN
 
-Dead simple C# console app that allows shutting down by [Wake-on-LAN (WOL)](https://en.wikipedia.org/wiki/Wake-on-LAN) magic packet.
+Dead simple C# console app that allows shutting down by [Wake-on-LAN (WoL)](https://en.wikipedia.org/wiki/Wake-on-LAN) magic packet.
 
-Like an author of [that article](https://habr.com/ru/articles/816765/) (in Russian), I also wondered if it is possible to do remote shutdowns without using any other applications (as for me, I used `sudo shutdown now` via SSH), so I decided to write my own implementation in C# that does the same thing via WOL.
+Like an author of [that article](https://habr.com/ru/articles/816765/) (in Russian), I also wondered if it is possible to do remote shutdowns without using any other applications (as for me, I used `sudo shutdown now` via SSH), so I decided to write my own implementation in C# that does the same thing via WoL.
 
 ## Build
 
