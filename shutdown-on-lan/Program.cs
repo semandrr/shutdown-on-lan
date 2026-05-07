@@ -57,7 +57,7 @@ class Program
                         string mac = GetMacFromPacket(bytes);
                         if (mac == Config.macAddr.ToUpper())
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Received WoL packet on valid MAC {mac} from {ip}, sending shutdown request.");
+                            Console.WriteLine($"[{DateTime.Now}] Received WoL packet from {ip}, sending shutdown request.");
                             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                             {
                                 if (Config.instantShutdown == 0)
@@ -84,7 +84,7 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet received on invalid MAC {mac} from {ip}");
+                            Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet received on MAC {mac} from {ip}");
                         }
                     }
                 }
