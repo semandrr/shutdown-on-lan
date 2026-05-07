@@ -26,7 +26,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/root/shutdown-on-lan
-ExecStart=/root/shutdown-on-lan/bin/Debug/net10.0/shutdown-on-lan
+ExecStart=/root/shutdown-on-lan/shutdown-on-lan/bin/Debug/net10.0/shutdown-on-lan
 Restart=on-failure
 
 [Install]
