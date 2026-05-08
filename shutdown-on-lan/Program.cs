@@ -106,9 +106,17 @@ class Program
 
     static bool IsMagicPacket(byte[] packet)
     {
-        if (packet.Length < 102) return false;
+        if (packet.Length < 102)
+        {
+            return false;
+        }
         for (int i = 0; i < 6; i++)
-            if (packet[i] != 0xFF) return false;
+        {
+            if (packet[i] != 0xFF)
+            {
+                return false;
+            }
+        }
         return true;
     }
 
