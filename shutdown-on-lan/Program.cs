@@ -48,12 +48,12 @@ class Program
             Environment.Exit(1);
         }
 
-        using (UdpClient listener = new UdpClient(Config.wolPort))
+        try
         {
-            IPEndPoint ip = new IPEndPoint(IPAddress.Any, Config.wolPort);
-            Console.WriteLine($"[{DateTime.Now}] Listening for WoL packets on port {Config.wolPort}...");
-            try
+            using (UdpClient listener = new UdpClient(Config.wolPort))
             {
+                IPEndPoint ip = new IPEndPoint(IPAddress.Any, Config.wolPort);
+                Console.WriteLine($"[{DateTime.Now}] Listening for WoL packets on port {Config.wolPort}...");
                 while (true)
                 {
                     byte[] bytes = listener.Receive(ref ip);
@@ -97,10 +97,27 @@ class Program
                     }
                 }
             }
-            catch (SocketException e)
+        }
+        catch (SocketException e)
+        {
+            if (e.Message == "Permission denied")
             {
-                Console.WriteLine($"Socket error: {e.Message}");
+                Console.WriteLine($"Failed to bind {Config.wolPort}: are you root? (Permission denied)");
             }
+            else
+            {
+                Console.WriteLine($"Failed to bind {Config.wolPort} port/any other socket exception happened: {e.Message}");
+                Console.WriteLine($"Stack trace: {e.StackTrace}");
+                Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
+            }
+            Environment.Exit(1);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Something seriously gone wrong (Fatal exception): {e.Message}");
+            Console.WriteLine($"Stack trace: {e.StackTrace}");
+            Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
+            Environment.Exit(1);
         }
     }
 
