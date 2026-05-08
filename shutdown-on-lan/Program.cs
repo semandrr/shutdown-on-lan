@@ -42,6 +42,11 @@ class Program
             Console.WriteLine("instantShutdown variable should be 1 or 0, please check config for any mistakes!");
             Environment.Exit(1);
         }
+        if (Config.silent != 0 && Config.silent != 1)
+        {
+            Console.WriteLine("silent variable should be 1 or 0, please check config for any mistakes!");
+            Environment.Exit(1);
+        }
 
         using (UdpClient listener = new UdpClient(Config.wolPort))
         {
@@ -84,7 +89,10 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet received on MAC {mac} from {ip}");
+                            if (Config.silent == 0)
+                            {
+                                Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet received on MAC {mac} from {ip}");
+                            }
                         }
                     }
                 }
