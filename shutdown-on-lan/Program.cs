@@ -102,7 +102,7 @@ class Program
         {
             if (e.Message == "Permission denied")
             {
-                Console.WriteLine($"Failed to bind {Config.wolPort}: are you root? (Permission denied)");
+                Console.WriteLine($"Failed to bind {Config.wolPort} port: are you root? (Permission denied)");
             }
             else
             {
