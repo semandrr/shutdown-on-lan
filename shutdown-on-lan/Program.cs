@@ -20,7 +20,7 @@ class Program
         {
             if (!Config.macAddr.Contains(":"))
             {
-                Console.WriteLine("Invalid MAC-address specified in config");
+                Console.WriteLine("Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
             }
         }
@@ -28,23 +28,23 @@ class Program
         {
             if (Config.macAddr == "edit_me")
             {
-                Console.WriteLine("You forgot to edit the config :/");
+                Console.WriteLine("You forgot to edit Config.cs :/");
                 Environment.Exit(1);
             }
             else
             {
-                Console.WriteLine("Invalid MAC-address specified in config");
+                Console.WriteLine("Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
             }
         }
         if (Config.instantShutdown != 0 && Config.instantShutdown != 1)
         {
-            Console.WriteLine("instantShutdown variable should be 1 or 0, please check config for any mistakes!");
+            Console.WriteLine("instantShutdown setting in Config.cs should be 1 or 0, please check it for any mistakes!");
             Environment.Exit(1);
         }
         if (Config.silent != 0 && Config.silent != 1)
         {
-            Console.WriteLine("silent variable should be 1 or 0, please check config for any mistakes!");
+            Console.WriteLine("silent setting in Config.cs should be 1 or 0, please check it for any mistakes!");
             Environment.Exit(1);
         }
 
