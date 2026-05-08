@@ -91,7 +91,7 @@ class Program
                         {
                             if (Config.silent == 0)
                             {
-                                Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet received on MAC {mac} from {ip}");
+                                Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet sent to {mac} from {ip}");
                             }
                         }
                     }
