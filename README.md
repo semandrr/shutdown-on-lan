@@ -38,7 +38,7 @@ On Windows, it should be possible by creating a service via [NSSM](https://nssm.
 
 ## Known issues
 
-- Currently, the only way to configure the application is to edit variables in `Config.cs` classfile and rebuild, which is a time-consuming and not user-friendly process. In future, I may add configuration via file/command-line arguments.
+- Currently, the only way to configure the application is to edit variables in `Config.cs` classfile and rebuild, which is a time-consuming and not user-friendly process. In the future, I may add configuration via file/command-line arguments.
 
 - MacOS and FreeBSD are not supported, I never used these operating systems before. If you really need to run this application on them, make necessary changes by yourself and submit a pull request.
 
