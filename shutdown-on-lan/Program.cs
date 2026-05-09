@@ -18,7 +18,7 @@ class Program
         // check config validity
         if (Config.macAddr.Length == 17)
         {
-            if (!Config.macAddr.Contains(":"))
+            if (!Config.macAddr.Contains(':'))
             {
                 Console.WriteLine("Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
