@@ -107,7 +107,9 @@ class Program
             else
             {
                 Console.WriteLine($"Failed to bind {Config.wolPort} port/any other socket exception happened: {e.Message}");
-                Console.WriteLine($"Stack trace: {e.StackTrace}");
+                Console.WriteLine("Stack trace:");
+                Console.WriteLine(e.Message);
+                Console.WriteLine();
                 Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
             }
             Environment.Exit(1);
@@ -115,7 +117,9 @@ class Program
         catch (Exception e)
         {
             Console.WriteLine($"Something seriously gone wrong (Fatal exception): {e.Message}");
-            Console.WriteLine($"Stack trace: {e.StackTrace}");
+            Console.WriteLine("Stack trace:");
+            Console.WriteLine(e.Message);
+            Console.WriteLine();
             Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
             Environment.Exit(1);
         }
