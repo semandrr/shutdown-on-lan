@@ -18,7 +18,7 @@ class Program
         // check config validity
         if (Config.macAddr.Length == 17)
         {
-            if (!Config.macAddr.Contains(':'))
+            if (!Config.macAddr.Contains(':') && !Config.macAddr.Contains('-'))
             {
                 Console.WriteLine("Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
@@ -71,7 +71,7 @@ class Program
                     if (IsMagicPacket(bytes))
                     {
                         string mac = GetMacFromPacket(bytes);
-                        if (mac == Config.macAddr.ToUpper())
+                        if (mac == Config.macAddr.ToUpper().Replace('-', ':'))
                         {
                             Console.WriteLine($"[{DateTime.Now}] Received WoL packet from {ip}, sending shutdown request.");
                             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
