@@ -133,7 +133,7 @@ class Program
             {
                 Console.WriteLine($"Failed to bind to {Config.wolPort} port/any other socket exception happened: {e.Message}");
                 Console.WriteLine("Stack trace:");
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 Console.WriteLine();
                 Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
             }
@@ -143,7 +143,7 @@ class Program
         {
             Console.WriteLine($"Something seriously gone wrong (Fatal exception): {e.Message}");
             Console.WriteLine("Stack trace:");
-            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
             Console.WriteLine();
             Console.WriteLine("It's highly likely that you caught a bug, please report it in repository issues with steps to reproduce.");
             Environment.Exit(1);
