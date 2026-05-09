@@ -12,7 +12,7 @@ Like an author of [that article](https://habr.com/ru/articles/816765/) (in Russi
 
 3. Run `dotnet build`.
 
-4. The compiled application should be in `bin` folder. On Linux, you must run it with root privileges, as it is not possible to bind to ports lesser than <1024 without them and even shutting down the system.
+4. The compiled application should be in `bin` folder. On Linux, you must run it with root privileges, as it is not possible to bind to ports less than <1024 without them and even shutting down the system.
 
 ## Background launch
 
