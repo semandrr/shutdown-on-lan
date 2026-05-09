@@ -47,6 +47,17 @@ class Program
             Console.WriteLine("silent setting in Config.cs should be 1 or 0, please check it for any mistakes!");
             Environment.Exit(1);
         }
+        if (string.IsNullOrWhiteSpace(Config.shutdownMessage))
+        {
+            Console.WriteLine("shutdownMessage in Config.cs cannot be empty or consist of only whitespace characters!");
+            Console.WriteLine("If you wish to disable it, set noMessage to 1");
+            Environment.Exit(1);
+        }
+        if (Config.noMessage != 0 && Config.noMessage != 1)
+        {
+            Console.WriteLine("noMessage setting in Config.cs should be 1 or 0, please check it for any mistakes!");
+            Environment.Exit(1);
+        }
 
         try
         {
@@ -67,7 +78,14 @@ class Program
                             {
                                 if (Config.instantShutdown == 0)
                                 {
-                                    Process.Start("shutdown", "+1 \"Shutdown request on WoL\"");
+                                    if (Config.noMessage == 0)
+                                    {
+                                        Process.Start("shutdown", $"+1 \"{Config.shutdownMessage}\"");
+                                    }
+                                    else
+                                    {
+                                        Process.Start("shutdown", "+1");
+                                    }
                                 }
                                 else
                                 {
@@ -78,7 +96,14 @@ class Program
                             {
                                 if (Config.instantShutdown == 0)
                                 {
-                                    Process.Start("shutdown", "/s /t 60 /c \"Shutdown request on WoL\"");
+                                    if (Config.noMessage == 0)
+                                    {
+                                        Process.Start("shutdown", $"/s /t 60 /c \"{Config.shutdownMessage}\"");
+                                    }
+                                    else
+                                    {
+                                        Process.Start("shutdown", "/s /t 60");
+                                    }
                                 }
                                 else
                                 {
