@@ -50,7 +50,7 @@ class Program
         if (string.IsNullOrWhiteSpace(Config.shutdownMessage))
         {
             Console.WriteLine("shutdownMessage in Config.cs cannot be empty or consist of only whitespace characters!");
-            Console.WriteLine("If you wish to disable it, set noMessage to 1");
+            Console.WriteLine("If you wish to disable it, set noMessage setting to 1");
             Environment.Exit(1);
         }
         if (Config.noMessage != 0 && Config.noMessage != 1)
