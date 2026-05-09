@@ -102,11 +102,11 @@ class Program
         {
             if (e.Message == "Permission denied")
             {
-                Console.WriteLine($"Failed to bind {Config.wolPort} port: are you root? (Permission denied)");
+                Console.WriteLine($"Failed to bind to {Config.wolPort} port: are you root? (Permission denied)");
             }
             else
             {
-                Console.WriteLine($"Failed to bind {Config.wolPort} port/any other socket exception happened: {e.Message}");
+                Console.WriteLine($"Failed to bind to {Config.wolPort} port/any other socket exception happened: {e.Message}");
                 Console.WriteLine("Stack trace:");
                 Console.WriteLine(e.Message);
                 Console.WriteLine();
