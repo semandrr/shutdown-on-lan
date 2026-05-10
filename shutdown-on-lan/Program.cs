@@ -125,13 +125,17 @@ class Program
         }
         catch (SocketException e)
         {
-            if (e.Message == "Permission denied")
+            if (e.SocketErrorCode == SocketError.AccessDenied)
             {
                 Console.WriteLine($"Failed to bind to {Config.wolPort} port: are you root? (Permission denied)");
             }
+            else if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
+            {
+                Console.WriteLine($"Failed to bind to {Config.wolPort} port: another program is already using it (Address already in use)");
+            }
             else
             {
-                Console.WriteLine($"Failed to bind to {Config.wolPort} port/any other socket exception happened: {e.Message}");
+                Console.WriteLine($"Failed to bind to {Config.wolPort} port: {e.Message}");
                 Console.WriteLine("Stack trace:");
                 Console.WriteLine(e.StackTrace);
                 Console.WriteLine();
