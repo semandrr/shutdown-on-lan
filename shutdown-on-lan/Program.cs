@@ -59,6 +59,8 @@ class Program
             Environment.Exit(1);
         }
 
+        string formattedMac = Config.macAddr.ToUpper().Replace('-', ':');
+
         try
         {
             using (UdpClient listener = new UdpClient(Config.wolPort))
@@ -71,7 +73,7 @@ class Program
                     if (IsMagicPacket(bytes))
                     {
                         string mac = GetMacFromPacket(bytes);
-                        if (mac == Config.macAddr.ToUpper().Replace('-', ':'))
+                        if (mac == formattedMac)
                         {
                             Console.WriteLine($"[{DateTime.Now}] Received WoL packet from {ip}, sending shutdown request.");
                             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
