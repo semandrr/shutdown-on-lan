@@ -8,4 +8,5 @@ public class Config
     public static readonly int silent = 0; // hide messages about ignoring WoL packets sent to different MAC-address
     public static readonly string shutdownMessage = "Received WoL packet. The system will shutdown after 1 minute."; // if instantShutdown is not enabled, this message will be displayed to users before shutting down the system
     public static readonly int noMessage = 0; // if set to 1, shutdown message will not be displayed
+    public static readonly int showInvalid = 0; // if set to 1, messages about invalid UDP packets will be displayed
 }

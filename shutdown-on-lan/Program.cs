@@ -120,6 +120,13 @@ class Program
                             }
                         }
                     }
+                    else
+                    {
+                        if (Config.showInvalid == 1)
+                        {
+                            Console.WriteLine($"[{DateTime.Now}] Invalid UDP packet sent from {ip}");
+                        }
+                    }
                 }
             }
         }
