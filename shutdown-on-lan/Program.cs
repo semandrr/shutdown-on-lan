@@ -16,6 +16,7 @@ class Program
         }
 
         // check config validity
+        bool noMessage = false;
         if (Config.macAddr.Length == 17)
         {
             if (!Config.macAddr.Contains(':') && !Config.macAddr.Contains('-'))
@@ -49,14 +50,8 @@ class Program
         }
         if (string.IsNullOrWhiteSpace(Config.shutdownMessage))
         {
-            Console.WriteLine("shutdownMessage in Config.cs cannot be empty or consist of only whitespace characters!");
-            Console.WriteLine("If you wish to disable it, set noMessage setting to 1");
-            Environment.Exit(1);
-        }
-        if (Config.noMessage != 0 && Config.noMessage != 1)
-        {
-            Console.WriteLine("noMessage setting in Config.cs should be 1 or 0, please check it for any mistakes!");
-            Environment.Exit(1);
+            Console.WriteLine($"[{DateTime.Now}] WARNING: shutdownMessage in Config.cs is not specified/consists of only whitespace characters, not using it!");
+            noMessage = true;
         }
 
         string formattedMac = Config.macAddr.ToUpper().Replace('-', ':');
@@ -80,7 +75,7 @@ class Program
                             {
                                 if (Config.instantShutdown == 0)
                                 {
-                                    if (Config.noMessage == 0)
+                                    if (noMessage == false)
                                     {
                                         Process.Start("shutdown", $"+1 \"{Config.shutdownMessage}\"");
                                     }
@@ -98,7 +93,7 @@ class Program
                             {
                                 if (Config.instantShutdown == 0)
                                 {
-                                    if (Config.noMessage == 0)
+                                    if (noMessage == false)
                                     {
                                         Process.Start("shutdown", $"/s /t 60 /c \"{Config.shutdownMessage}\"");
                                     }
