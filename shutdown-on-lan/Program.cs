@@ -11,7 +11,7 @@ class Program
         // not supported, i never used these systems before
         if (RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            Console.WriteLine("Operating system not supported");
+            Console.WriteLine($"[{DateTime.Now}] FATAL: Operating system not supported");
             Environment.Exit(1);
         }
 
@@ -21,7 +21,7 @@ class Program
         {
             if (!Config.macAddr.Contains(':') && !Config.macAddr.Contains('-'))
             {
-                Console.WriteLine("Invalid MAC-address specified in Config.cs");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
             }
         }
@@ -29,23 +29,23 @@ class Program
         {
             if (Config.macAddr == "edit_me")
             {
-                Console.WriteLine("You forgot to edit Config.cs :/");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: You forgot to edit Config.cs!");
                 Environment.Exit(1);
             }
             else
             {
-                Console.WriteLine("Invalid MAC-address specified in Config.cs");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: Invalid MAC-address specified in Config.cs");
                 Environment.Exit(1);
             }
         }
         if (Config.instantShutdown != 0 && Config.instantShutdown != 1)
         {
-            Console.WriteLine("instantShutdown setting in Config.cs should be 1 or 0, please check it for any mistakes!");
+            Console.WriteLine($"[{DateTime.Now}] FATAL: instantShutdown setting in Config.cs should be 1 or 0, please check it for any mistakes!");
             Environment.Exit(1);
         }
         if (Config.silent != 0 && Config.silent != 1)
         {
-            Console.WriteLine("silent setting in Config.cs should be 1 or 0, please check it for any mistakes!");
+            Console.WriteLine($"[{DateTime.Now}] FATAL: silent setting in Config.cs should be 1 or 0, please check it for any mistakes!");
             Environment.Exit(1);
         }
         if (string.IsNullOrWhiteSpace(Config.shutdownMessage))
@@ -113,7 +113,7 @@ class Program
                         {
                             if (Config.silent == 0)
                             {
-                                Console.WriteLine($"[{DateTime.Now}] Ignoring WoL packet sent to {mac} from {ip}");
+                                Console.WriteLine($"[{DateTime.Now}] WARNING: Ignoring WoL packet sent to {mac} from {ip}");
                             }
                         }
                     }
@@ -121,7 +121,7 @@ class Program
                     {
                         if (Config.showInvalid == 1)
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Invalid UDP packet sent from {ip}");
+                            Console.WriteLine($"[{DateTime.Now}] WARNING: Invalid UDP packet sent from {ip}");
                         }
                     }
                 }
@@ -131,15 +131,15 @@ class Program
         {
             if (e.SocketErrorCode == SocketError.AccessDenied)
             {
-                Console.WriteLine($"Failed to bind to {Config.wolPort} port: are you root? (Permission denied)");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: Failed to bind to {Config.wolPort} port: are you root? (Permission denied)");
             }
             else if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
             {
-                Console.WriteLine($"Failed to bind to {Config.wolPort} port: another program is already using it (Address already in use)");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: Failed to bind to {Config.wolPort} port: another program is already using it (Address already in use)");
             }
             else
             {
-                Console.WriteLine($"Failed to bind to {Config.wolPort} port: {e.Message}");
+                Console.WriteLine($"[{DateTime.Now}] FATAL: Failed to bind to {Config.wolPort} port: {e.Message}");
                 Console.WriteLine("Stack trace:");
                 Console.WriteLine(e.StackTrace);
                 Console.WriteLine();
@@ -149,7 +149,7 @@ class Program
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Something seriously gone wrong (Fatal exception): {e.Message}");
+            Console.WriteLine($"[{DateTime.Now}] FATAL: Something seriously gone wrong (Fatal exception): {e.Message}");
             Console.WriteLine("Stack trace:");
             Console.WriteLine(e.StackTrace);
             Console.WriteLine();
