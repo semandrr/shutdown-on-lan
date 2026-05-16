@@ -8,3 +8,6 @@ dotnet_diagnostic.IDE0063.severity = none
 
 # IDE0005: Using directive is unnecessary.
 dotnet_diagnostic.IDE0005.severity = none
+
+# CS0162: Unreachable code detected
+dotnet_diagnostic.CS0162.severity = error
